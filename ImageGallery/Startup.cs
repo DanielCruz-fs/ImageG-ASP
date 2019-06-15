@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ImageGalleryData;
+using ImageGalleryServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,8 @@ namespace ImageGallery
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //Injecting Services
+            services.AddScoped<IImage, ImageService>();
             //Database connection
             services.AddDbContext<ImageGalleryDbContext>(options =>
                                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
